@@ -1,0 +1,133 @@
+{
+  "discounts": [
+    {
+      "description": "hfhdh",
+      "imagePath": "https://la.ua/wp-content/uploads/2021/08/6-1.jpg",
+      "id": 1
+    }
+  ],
+  "categories": [
+    {
+      "name": "Піца",
+      "path": "pizza",
+      "imagePath": "https://firebasestorage.googleapis.com/v0/b/la-ua-78c4b.appspot.com/o/images%2Fmenu-icon-2.svg?alt=media&token=8e7d2635-8382-441d-a9c1-cb0cd5fbd1b1",
+      "id": 1
+    },
+    {
+      "name": "Салати",
+      "path": "salads",
+      "imagePath": "https://firebasestorage.googleapis.com/v0/b/la-ua-78c4b.appspot.com/o/images%2Fmenu-icon-3.svg?alt=media&token=5c5a9542-36fa-42eb-a0e3-121e6ea3d417",
+      "id": 2
+    },
+    {
+      "name": "Десерти",
+      "path": "desserts",
+      "imagePath": "https://firebasestorage.googleapis.com/v0/b/la-ua-78c4b.appspot.com/o/images%2Fdeserty-nova.svg?alt=media&token=fcce5ce1-8bac-48c9-b497-91b4f01f6d30",
+      "id": 3
+    },
+    {
+      "name": "Напої",
+      "path": "drinks",
+      "imagePath": "https://firebasestorage.googleapis.com/v0/b/la-ua-78c4b.appspot.com/o/images%2Fmenu-icon-4.svg?alt=media&token=2b404b10-ae66-48bc-8307-9b0d86cdb1cc",
+      "id": 4
+    }
+  ],
+  "products": [
+    {
+      "category": {
+        "name": "Піца",
+        "path": "pizza",
+        "imagePath": "https://firebasestorage.googleapis.com/v0/b/la-ua-78c4b.appspot.com/o/images%2Fmenu-icon-2.svg?alt=media&token=8e7d2635-8382-441d-a9c1-cb0cd5fbd1b1",
+        "id": 1
+      },
+      "name": " Джавеліна",
+      "path": "javelin",
+      "description": "соус кисло-солодкий, сир моцарела, курка, цибуля, баварські ковбаски, корнішон.",
+      "weight": "460 г",
+      "price": 251,
+      "proteins": 14.2,
+      "carbohydrates": 32.2,
+      "fats": 7.8,
+      "calories": 261,
+      "imagePath": "https://firebasestorage.googleapis.com/v0/b/la-ua-78c4b.appspot.com/o/images%2Fdzhavelina-2.jpg?alt=media&token=6c3c2317-e187-4dfd-a045-555a137f0778",
+      "count": 1,
+      "id": 1
+    },
+    {
+      "category": {
+        "name": "Салати",
+        "path": "salads",
+        "imagePath": "https://firebasestorage.googleapis.com/v0/b/la-ua-78c4b.appspot.com/o/images%2Fmenu-icon-3.svg?alt=media&token=5c5a9542-36fa-42eb-a0e3-121e6ea3d417",
+        "id": 2
+      },
+      "name": "Салат Цезаріо",
+      "path": "salat-czezar-zi-smazhenym-kuryachym-file",
+      "description": "Салат айсберг, помідори, куряче м`ясо, сир пармезан, перепелині яйця, духмяні сухарики та фірмова заправка - соус «Цезар».",
+      "weight": "250 г",
+      "price": 229,
+      "proteins": 11.8,
+      "carbohydrates": 9.8,
+      "fats": 22.5,
+      "calories": 291,
+      "imagePath": "https://firebasestorage.googleapis.com/v0/b/la-ua-78c4b.appspot.com/o/images%2Fczezarnovyj-3.jpg?alt=media&token=53e2c281-d6b8-4717-a12d-c91159739893",
+      "count": 1,
+      "id": 2
+    },
+    {
+      "category": {
+        "name": "Десерти",
+        "path": "desserts",
+        "imagePath": "https://firebasestorage.googleapis.com/v0/b/la-ua-78c4b.appspot.com/o/images%2Fdeserty-nova.svg?alt=media&token=fcce5ce1-8bac-48c9-b497-91b4f01f6d30",
+        "id": 3
+      },
+      "name": "Чізкейк з вишнею",
+      "path": "cheesecake-cherry",
+      "description": "Вишня, пшеничне борошно, цукор, куряче яйце, масло вершкове, желатин, молочні вершки, сир вершковий, соняшниковий маргарин",
+      "weight": "130 г",
+      "price": 150,
+      "proteins": 9,
+      "carbohydrates": 22.8,
+      "fats": 20.1,
+      "calories": 360,
+      "imagePath": "https://firebasestorage.googleapis.com/v0/b/la-ua-78c4b.appspot.com/o/images%2Fchizkejk-z-vyshneyu.jpg?alt=media&token=c23aff08-c6ca-4767-ad97-4db2dd788138",
+      "count": 1,
+      "id": 3
+    },
+    {
+      "category": {
+        "name": "Напої",
+        "path": "drinks",
+        "imagePath": "https://firebasestorage.googleapis.com/v0/b/la-ua-78c4b.appspot.com/o/images%2Fmenu-icon-4.svg?alt=media&token=2b404b10-ae66-48bc-8307-9b0d86cdb1cc",
+        "id": 4
+      },
+      "name": "Екзотик Нектар",
+      "path": "rich-ekzotic",
+      "description": "Екзотик Нектар, 1 л, ТМ “RICH”",
+      "weight": "1 л",
+      "price": 65,
+      "proteins": 0,
+      "carbohydrates": 0,
+      "fats": 0,
+      "calories": 0,
+      "imagePath": "https://firebasestorage.googleapis.com/v0/b/la-ua-78c4b.appspot.com/o/images%2Frich_ekzotic.jpg?alt=media&token=438930ff-1177-48ba-beca-1db69a380086",
+      "count": 1,
+      "id": 4
+    }
+  ],
+  "auth": [
+    {
+      "id": 1,
+      "email": "admin@gmail.com",
+      "password": "qwerty123",
+      "fullName": "Petro Petriv",
+      "role": "ADMIN"
+    },
+    {
+      "id": 2,
+      "email": "user@gmail.com",
+      "password": "qwerty123",
+      "fullName": "Pavlo Pavliv",
+      "role": "USER"
+    }
+  ]
+}

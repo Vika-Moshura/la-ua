@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 mt-3">
+      <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img [src]="currentProduct.imagePath" class="img-fluid rounded-start" [alt]="currentProduct.name">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h2 class="card-title">{{currentProduct.name}}</h2>
+              <p class="card-text">{{currentProduct.description}}</p>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Білки</th>
+                    <th>Вуглеводи</th>
+                    <th>Жири</th>
+                    <th>Калорії</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{currentProduct.proteins}} г</td>
+                    <td>{{currentProduct.carbohydrates}} г</td>
+                    <td>{{currentProduct.fats}} г</td>
+                    <td>{{currentProduct.calories}} ккал</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p class="card-text">Розмір: 30 см</p>
+              <p class="card-text">Вага: {{currentProduct.weight}}</p>
+              <div class="btn-group" role="group" aria-label="Basic outlined example">
+                <button (click)="productCount(currentProduct,false)" type="button"
+                  class="btn btn-outline-danger">-</button>
+                <input class="form-control" type="text" [value]="currentProduct.count" style="width: 40px;">
+                <button (click)="productCount(currentProduct,true)" type="button"
+                  class="btn btn-outline-danger">+</button>
+              </div>
+              <a class="btn btn-outline-danger" (click)="addToBasket(currentProduct)">Замовити</a>
+              <h4 class="card-title text-danger mt-3">{{currentProduct.price * currentProduct.count}}грн</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

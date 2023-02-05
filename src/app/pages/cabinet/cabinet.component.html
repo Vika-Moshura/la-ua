@@ -1,0 +1,89 @@
+<div class="cabinet-section section">
+    <div class="spacer-xl style-2"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+          <div class="sectionTitle fadeInTop grey-title cabinet-main-title">
+            <h4 class="h4 as text-center title">Особистий кабінет</h4>
+          </div>
+          <div class="my-bonus" style="opacity: 0;">Мої бонуси: <span>0</span></div>
+          <div class="accordion">
+            <div class="accordion-item">
+              <div class="accordion-title">
+                <span>
+                  <img src="https://la.ua/wp-content/themes/lapiec/assets/frontend/img/cabinet_1.png" alt=""></span>
+                Історія замовлень
+              </div>
+              <div class="accordion-inner history" style="display: none;">
+                <div class="history-wrapper">
+                  <div class="history-js ">
+                    <div class="history-item">
+                      <div class="history-num">91133</div>
+                      <div class="history-data">21:21 08/09/2021</div>
+                      <div class="history-price">791 грн</div>
+                      <div class="history-gps">Львів, Франка 61/500</div>
+                      <div class="history-btn">
+                        <a href="https://la.ua//?repeat_order=e7752f78-08d8-686e-47c1-24171c70aa10" class="button">Повторити</a></div>
+                    </div>
+                    <div class="history-block">
+                      <div class="history-block-top">
+                        <div>Замовленні товари</div>
+                        <div>К-ть</div>
+                        <div>Ціна</div>
+                      </div>
+                      <div class="history-block-prod">
+                        <a href="https://la.ua/product/czezario/" class="history-block-imgs">
+                          <img width="700" height="700" src="https://la.ua/wp-content/uploads/2021/08/tsezario.jpg" class="attachment-full size-full" alt=""></a>
+                        <a href="https://la.ua/product/czezario/" class="history-block-name">Цезаріо</a>
+                        <div class="history-block-num">2</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="history-bottom"><a class="more" data-per-page="5" href="#">Показати більше</a></div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <div class="accordion-title active">
+                <span><img src="https://la.ua/wp-content/themes/lapiec/assets/frontend/img/cabinet_2.png" alt=""></span>
+                Персональні дані
+              </div>
+              <div class="accordion-inner personal" style="display: block;">
+                <div class="form-group">
+                  <span>
+                    <input name="name" type="text" class="input" placeholder="Ваше ім`я*" required>
+                  </span>
+                  <span>
+                    <input name="tel" type="text" class="input" placeholder="Телефон*" pattern="^(8|\+?\d{1,3})?[ -]?\(?(\d{3})\)?[ -]?(\d{3})[ -]?(\d{2})[ -]?(\d{2})$" required="" readonly="" inputmode="text">
+                  </span>
+                  <span>
+                    <input name="name" type="text" class="input" placeholder="День народження" required>
+                  </span>
+                  <div class="btn-group">
+                    <button class="button save">Зберегти</button>
+                    <button class="button cancel">Відмінити</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <div class="accordion-title">
+                <span><img src="https://la.ua/wp-content/themes/lapiec/assets/frontend/img/cabinet_3.png" alt=""></span>
+                Адреси доставки
+              </div>
+            </div>
+            <div class="accordion-item promo-item">
+              <div class="accordion-title">
+                <span><img src="https://la.ua/wp-content/themes/lapiec/assets/frontend/img/cabinet_4.png" alt=""></span>
+                Реферальне посилання<br> і промо-код
+              </div>
+            </div>
+          </div>
+          <div class="btn-group">
+            <a class="button" (click)="signOut()">Вихід</a>
+          </div>
+        </div>
+      </div>
+      <div class="spacer-xl type2"></div>
+    </div>
+  </div>

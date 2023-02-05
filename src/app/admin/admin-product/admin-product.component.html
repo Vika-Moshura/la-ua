@@ -1,0 +1,127 @@
+<div class="row">
+  <p>
+    <a class="btn" [ngClass]="{'btn-primary': !isOpen, 'btn-success':isOpen}"
+      (click)="toggleOpenForm()">{{isOpen ? 'Close category form':'Open category form'}}</a></p>
+  <ng-container *ngIf="isOpen">
+    <div class="collapse" id="collapseExample" [ngClass]="{'show': isOpen}">
+      <div class="col-12">
+        <form [formGroup]="productForm" (ngSubmit)="addProduct()">
+          <div class="row">
+            <div class="col mb-3">
+              <label for="category" class="form-label">Category</label>
+              <select class="form-select" name="category" formControlName="category" id="category">
+                <option [ngValue]="category" *ngFor="let category of adminCategories">{{category.name}}</option>
+              </select>
+            </div>
+            <div class="col mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input formControlName="name" name="name" type="text" class="form-control" id="name">
+            </div>
+            <div class="col mb-3">
+              <label for="path" class="form-label">Path</label>
+              <input formControlName="path" name="path" type="text" class="form-control" id="path">
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea formControlName="description" name="description" class="form-control" id="description"></textarea>
+          </div>
+          <div class="row">
+            <div class="col mb-3">
+              <label for="weight" class="form-label">Weight</label>
+              <input formControlName="weight" name="weight" type="string" class="form-control" id="weight">
+            </div>
+            <div class="col mb-3">
+              <label for="price" class="form-label">Price</label>
+              <input formControlName="price" name="price" type="number" class="form-control" id="price">
+            </div>
+            <div class="col mb-3">
+              <label for="proteins" class="form-label">Proteins</label>
+              <input formControlName="proteins" name="proteins" type="number" class="form-control" id="proteins">
+            </div>
+            <div class="col mb-3">
+              <label for="carbohydrates" class="form-label">Carbohydrates</label>
+              <input formControlName="carbohydrates" name="carbohydrates" type="number" class="form-control"
+                id="carbohydrates">
+            </div>
+            <div class=" col mb-3">
+              <label for="fats" class="form-label">Fats</label>
+              <input formControlName="fats" name="fats" type="number" class="form-control" id="fats">
+            </div>
+            <div class="col mb-3">
+              <label for="calories" class="form-label">Calories</label>
+              <input formControlName="calories" name="calories" type="number" class="form-control" id="calories">
+            </div>
+
+          </div>
+          <ng-container *ngIf="!isUploaded">
+            <div class="mb-3">
+              <label for="formFile" class="form-label">Default file input example</label>
+              <input class="form-control" type="file" id="formFile" (change)="upload($event)">
+            </div>
+            <div class="progress mb-3">
+              <div class="progress-bar progress-bar-striped" role="progressbar" [style.width.%]="uploadPercent"
+                aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="isUploaded">
+            <img [src]="valueByControl('imagePath')" width="100px" alt="">
+            <button type="button" class="btn btn-danger m-3" (click)="deleteImage()">delete</button>
+          </ng-container>
+          <button [disabled]="productForm.invalid" type="submit" class="btn btn-success w-100">
+            {{ editStatus ? 'Save' : 'Add' }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </ng-container>
+
+
+  <div class="col-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Category</th>
+          <th scope="col">Name</th>
+          <th scope="col">Path</th>
+          <th scope="col">Description</th>
+          <th scope="col">Weight</th>
+          <th scope="col">Price</th>
+          <th scope="col">Proteins</th>
+          <th scope="col">Carbohydrates</th>
+          <th scope="col">Fats</th>
+          <th scope="col">Calories</th>
+          <th scope="col">Image</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of adminProducts">
+          <td>{{ product.id }}</td>
+          <td>{{ product.category.name }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.path }}</td>
+          <td>
+            {{ product.description | slice:0:30 }}
+            <span *ngIf="product.description.length > 30">...</span>
+          </td>
+          <td>{{ product.weight }}</td>
+          <td>{{ product.price }}</td>
+          <td>{{ product.proteins }}</td>
+          <td>{{ product.carbohydrates }}</td>
+          <td>{{ product.fats }}</td>
+          <td>{{ product.calories }}</td>
+          <td>
+            <img [src]="product.imagePath" alt="" height="50px">
+          </td>
+          <td>
+            <button (click)="editProduct(product)" type="button" class="btn btn-secondary me-2">Edit</button>
+            <button [disabled]="editStatus" (click)="deleteProduct(product)" type="button"
+              class="btn btn-danger">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

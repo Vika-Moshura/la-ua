@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col-4 mt-3" *ngFor="let product of userProducts">
+      <div class="card">
+        <img [routerLink]="[ '/product/'+product.category.path, product.id]" 
+        [src]="product.imagePath" class="card-img-top" style="height: 354px;" [alt]="product.name">
+        <div class="card-body text-center">
+          <h5 [routerLink]="[ '/product/'+product.category.path, product.id]"  class="card-title">{{product.name}}</h5>
+          <p class="card-text" style="min-height: 80px;">{{product.description}}</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <h4 class="card-title text-danger">{{product.price}}грн</h4>
+            <div class="btn-group" role="group" aria-label="Basic outlined example">
+              <button type="button" class="btn btn-outline-danger">-</button>
+              <input class="form-control" type="text" value="1" style="width: 40px;">
+              <button type="button" class="btn btn-outline-danger">+</button>
+            </div>
+            <a class="btn btn-outline-danger">Замовити</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
