@@ -11,25 +11,39 @@ import { ProductService } from 'src/app/shared/services/product/product.service'
 })
 export class ProductInfoComponent implements OnInit {
   public currentProduct!: IProductResponse;
+  public currentCategoryName!: string;
+
   constructor(
     private productService: ProductService,
     private activatedRoute: ActivatedRoute,
-    private  orderService: OrderService,
+    private orderService: OrderService
   ) { }
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(response => {
       this.currentProduct = response['productInfo'];
+      console.log(this.currentProduct);
+      this.currentCategoryName = this.currentProduct.category.name;
+      console.log(this.currentCategoryName);
     })
   }
+
+  // loadProduct(): void {
+  //   const id = this.activatedRoute.snapshot.paramMap.get('id');
+  //   this.productService.getOneFirebase(id as string).subscribe(data => {
+  //     this.currentProduct = data as IProductResponse;
+  //     console.log(this.currentProduct);
+  //   })
+  // }
+
   productCount(product: IProductResponse, value: boolean): void {
     if (value) {
       ++product.count;
-    }
-    else if (!value && product.count > 1) {
+    } else if (!value && product.count > 1) {
       --product.count;
     }
   }
+
   addToBasket(product: IProductResponse): void {
     let basket: Array<IProductResponse> = [];
     if (localStorage.length > 0 && localStorage.getItem('basket')) {

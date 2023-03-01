@@ -1,20 +1,42 @@
-<div class="container">
-  <div class="row">
-    <div class="col-4 mt-3" *ngFor="let product of userProducts">
-      <div class="card">
-        <img [routerLink]="[ '/product/'+product.category.path, product.id]" 
-        [src]="product.imagePath" class="card-img-top" style="height: 354px;" [alt]="product.name">
-        <div class="card-body text-center">
-          <h5 [routerLink]="[ '/product/'+product.category.path, product.id]"  class="card-title">{{product.name}}</h5>
-          <p class="card-text" style="min-height: 80px;">{{product.description}}</p>
-          <div class="d-flex justify-content-between align-items-center">
-            <h4 class="card-title text-danger">{{product.price}}грн</h4>
-            <div class="btn-group" role="group" aria-label="Basic outlined example">
-              <button type="button" class="btn btn-outline-danger">-</button>
-              <input class="form-control" type="text" value="1" style="width: 40px;">
-              <button type="button" class="btn btn-outline-danger">+</button>
+<div class="header-margin"></div>
+<div class="main-products type2" id="home-pizza">
+  <div class="container">
+    <div class="row hidden-xs">
+      <div class="col-12">
+        <h2 class="h1 block-title">{{currentCategoryName | titlecase}}</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-lg-4" *ngFor="let product of userProducts">
+        <div class="productThumbnail ">
+          <div class="productSize-W">
+            <span class="weight"><em>{{ product.weight }}</em></span>
+            <span class="size" *ngIf="product.category.path === 'pizza'">30 см</span>
+          </div>
+          <a [routerLink]="[ '/product/'+product.category.path, product.id ]" class="productThumbnail-image">
+            <img [src]="product.imagePath" alt="" class="image-default">
+            <div class="image-hover">
+              <img [src]="product.imagePath" alt="">
             </div>
-            <a class="btn btn-outline-danger">Замовити</a>
+          </a>
+          <div class="productInfoWrapp">
+            <div class="productDescription ">
+              <div class="productTitle h5">
+                <a [routerLink]="[ '/product/'+product.category.path, product.id ]">{{product.name}}</a>
+              </div>
+              <p>{{product.description}}</p>
+            </div>
+            <div class="productOrder">
+              <div class="productPrice">
+                <span>{{product.price * product.count}} </span> <i>грн</i>
+              </div>
+              <div class="productCountWrapper">
+                <span class="productCount lessProduct" (click)="productCount(product, false)"></span>
+                <input type="text" maxlength="3" [value]="product.count">
+                <span class="productCount moreProduct" (click)="productCount(product, true)"></span>
+              </div>
+              <div class="button add-to-cart-product order-btn" (click)="addToBasket(product)">Замовити</div>
+            </div>
           </div>
         </div>
       </div>

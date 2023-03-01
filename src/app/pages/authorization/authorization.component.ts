@@ -16,7 +16,7 @@ import { AccountService } from 'src/app/shared/services/account/account.service'
 export class AuthorizationComponent implements OnInit, OnDestroy {
   public authForm!: FormGroup;
   public loginSubscription!: Subscription;
-
+  
   constructor(
     private fb: FormBuilder,
     private accountService: AccountService,
@@ -63,27 +63,5 @@ export class AuthorizationComponent implements OnInit, OnDestroy {
     })
   }
 
-  register() {
-    const { email, password } = this.authForm.value;
-    this.emailSignUp(email, password).then(() => {
-      this.toastr.success('User successfully created');
-    }).catch(e => {
-      this.toastr.error(e.message);
-    })
-  }
-
-  async emailSignUp(email: string, password: string): Promise<any> {
-    const credential = await createUserWithEmailAndPassword(this.auth, email, password);
-    const user = {
-      email: credential.user.email,
-      firstName: '',
-      lastName: '',
-      phoneNumber: '',
-      address: '',
-      orders: [],
-      role: 'USER'
-    };
-    setDoc(doc(this.afs, 'users', credential.user.uid), user);
-  }
 
 }

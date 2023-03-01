@@ -5,5 +5,5 @@ export interface ICategoryRequest {
 }
 
 export interface ICategoryResponse extends ICategoryRequest {
-    id: number;
+    id: number | string;
 }

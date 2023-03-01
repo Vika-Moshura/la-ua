@@ -17,7 +17,7 @@ export class AdminCategoryComponent implements OnInit {
   public editStatus = false;
   public uploadPercent!: number;
   public isUploaded = false;
-  private currentCategoryId = 0;
+  private currentCategoryId!: number | string;
 
   constructor(
     private fb: FormBuilder,
@@ -40,21 +40,32 @@ export class AdminCategoryComponent implements OnInit {
   }
 
   loadCategories(): void {
-    this.categoryService.getAll().subscribe(data => {
-      this.adminCategories = data;
+    // this.categoryService.getAll().subscribe(data => {
+    //   this.adminCategories = data;
+    // })
+    this.categoryService.getAllFirebase().subscribe(data => {
+      this.adminCategories = data as ICategoryResponse[];
     })
   }
 
   addCategory(): void {
     if (this.editStatus) {
-      this.categoryService.update(this.categoryForm.value, this.currentCategoryId).subscribe(() => {
-      this.loadCategories();
-      this.toastr.success('Category successfully edited');
+      // this.categoryService.update(this.categoryForm.value, this.currentCategoryId).subscribe(() => {
+      //   this.loadCategories();
+      //   this.toastr.success('Category successfully edited');
+      // })
+      this.categoryService.updateFirebase(this.categoryForm.value, this.currentCategoryId as string).then(() => {
+        this.loadCategories();
+        this.toastr.success('Category successfully edited');
       })
     } else {
-      this.categoryService.create(this.categoryForm.value).subscribe(() => {
-      this.loadCategories();
-      this.toastr.success('Category successfully added');
+      // this.categoryService.create(this.categoryForm.value).subscribe(() => {
+      // this.loadCategories();
+      // this.toastr.success('Category successfully added');
+      // })
+      this.categoryService.createFirebase(this.categoryForm.value).then(() => {
+        this.loadCategories();
+        this.toastr.success('Category successfully added');
       })
     }
     this.editStatus = false;
@@ -70,12 +81,16 @@ export class AdminCategoryComponent implements OnInit {
       imagePath: category.imagePath
     });
     this.editStatus = true;
-    this.currentCategoryId = category.id;
+    this.currentCategoryId = category.id as number;
     this.isUploaded = true;
   }
 
   deleteCategory(category: ICategoryResponse): void {
-    this.categoryService.delete(category.id).subscribe(() => {
+    // this.categoryService.delete(category.id as number).subscribe(() => {
+    //   this.loadCategories();
+    //   this.toastr.success('Category successfully deleted');
+    // })
+    this.categoryService.deleteFirebase(category.id as string).then(() => {
       this.loadCategories();
       this.toastr.success('Category successfully deleted');
     })
@@ -97,14 +112,14 @@ export class AdminCategoryComponent implements OnInit {
 
   deleteImage(): void {
     this.imageService.deleteUploadFile(this.valueByControl('imagePath'))
-    .then(() => {
-      console.log('File deleted');
-      this.isUploaded = false;
-      this.uploadPercent = 0;
-      this.categoryForm.patchValue({
-        imagePath: null
+      .then(() => {
+        console.log('File deleted');
+        this.isUploaded = false;
+        this.uploadPercent = 0;
+        this.categoryForm.patchValue({
+          imagePath: null
+        })
       })
-    })
   }
 
   valueByControl(control: string): string {

@@ -1,23 +1,17 @@
-<div class="container mt-3 mb-3">
-    <div class="row">
-        <ng-container *ngIf="userDiscounts.length > 0">
-            <div class="col-6 mt-3" *ngFor="let discount of userDiscounts">
-                <div class="card w-100">
-                    <img [src]="discount.imagePath" class="card-img-top" alt="...">
-                    <div class="card-body text-center">
-                        <a class="btn btn-warning" [routerLink]="[ '/discount', discount.id ]">Детальніше</a>
-                    </div>
-                </div>
-            </div>
-        </ng-container>
-        <ng-container *ngIf="userDiscounts.length === 0">
-            <div class="card text-center">
-                <div class="card-header"></div>
-                <div class="card-body">
-                    <h1 class="text-center">Discounts not added yet</h1>
-                </div>
-                <div class="card-footer text-muted"></div>
-              </div>
-        </ng-container>
+<div class="header-margin"></div>
+<div class="col-12 col-lg-10 offset-lg-1" style="padding-top: 3rem">
+  <div class="sectionTitle fadeInTop grey-title">
+    <h1 class="h4 as text-center title">Акції</h1>
+  </div>
+  <div class="row promotion-list">
+    <div class="col-12 col-md-6" *ngFor="let discount of userDiscounts">
+      <div class="discountProduct">
+        <a [routerLink]="[ '/discount', discount.id ]" class="imgWrapper">
+          <img [src]="discount.imagePath" class="attachment-full size-full yellow" alt="">
+          <img [src]="discount.imagePath" class="attachment-full size-full blue" alt="">
+        </a>
+        <a [routerLink]="[ '/discount', discount.id ]" class="button">Детальніше</a>
+      </div>
     </div>
+  </div>
 </div>

@@ -16,15 +16,16 @@
           <input class="form-control" type="file" id="formFile" (change)="upload($event)">
         </div>
         <div class="progress mb-3">
-          <div class="progress-bar progress-bar-striped" role="progressbar" [style.width.%]="uploadPercent"
-            aria-valuemin="0" aria-valuemax="100"></div>
+          <div class="progress-bar progress-bar-striped" role="progressbar"
+               [style.width.%]="uploadPercent"
+               aria-valuemin="0" aria-valuemax="100"></div>
         </div>
       </ng-container>
       <ng-container *ngIf="isUploaded">
-        <img [src]="valueByControl('imagePath')" width="100px" alt="">
+        <img [src]="valueByControl('imagePath')" alt="" width="100px">
         <button type="button" class="btn btn-danger" (click)="deleteImage()">delete</button>
       </ng-container>
-      <button [disabled]="categoryForm.invalid" type="submit" class="btn btn-success w-100">
+      <button [disabled]="categoryForm.invalid"  type="submit" class="btn btn-success w-100">
         {{ editStatus ? 'Save' : 'Add' }}
       </button>
     </form>
@@ -32,28 +33,27 @@
   <div class="col-8">
     <table class="table">
       <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Name</th>
-          <th scope="col">Path</th>
-          <th scope="col">Image</th>
-          <th scope="col">Actions</th>
-        </tr>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Path</th>
+        <th scope="col">Image</th>
+        <th scope="col">Actions</th>
+      </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let category of adminCategories">
-          <td>{{ category.id }}</td>
-          <td>{{ category.name }}</td>
-          <td>{{ category.path }}</td>
-          <td>
-            <img [src]="category.imagePath" alt="" height="50px">
-          </td>
-          <td>
-            <button (click)="editCategory(category)" type="button" class="btn btn-secondary me-2">Edit</button>
-            <button [disabled]="editStatus" (click)="deleteCategory(category)" type="button"
-              class="btn btn-danger">Delete</button>
-          </td>
-        </tr>
+      <tr *ngFor="let category of adminCategories">
+        <td>{{ category.id }}</td>
+        <td>{{ category.name }}</td>
+        <td>{{ category.path }}</td>
+        <td>
+          <img [src]="category.imagePath" alt="" height="50px">
+        </td>
+        <td>
+          <button (click)="editCategory(category)" type="button" class="btn btn-secondary me-2">Edit</button>
+          <button [disabled]="editStatus" (click)="deleteCategory(category)" type="button" class="btn btn-danger">Delete</button>
+        </td>
+      </tr>
       </tbody>
     </table>
   </div>

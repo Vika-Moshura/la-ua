@@ -16,5 +16,5 @@ export interface IProductRequest {
 }
 
 export interface IProductResponse extends IProductRequest {
-    id: number;
+    id: number | string;
 }

@@ -3,6 +3,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IProductResponse } from 'src/app/shared/interfaces/product/product.interface';
 import { ProductService } from 'src/app/shared/services/product/product.service';
+import { OrderService } from '../../shared/services/order/order.service';
 
 @Component({
   selector: 'app-product',
@@ -12,10 +13,13 @@ import { ProductService } from 'src/app/shared/services/product/product.service'
 export class ProductComponent implements OnInit, OnDestroy {
   public userProducts: Array<IProductResponse> = [];
   private eventSubscription!: Subscription;
+  public currentCategoryName!: string;
+
   constructor(
     private productService: ProductService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private orderService: OrderService
   ) {
     this.eventSubscription = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -28,9 +32,36 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   loadProducts(): void {
     const categoryName = this.activatedRoute.snapshot.paramMap.get('category') as string;
-    this.productService.getAllByCategory(categoryName).subscribe(data => {
-      this.userProducts = data;
-    })
+    this.productService.getAllByCategoryFirebase(categoryName).then(data => {
+      this.userProducts = data as IProductResponse[];
+      this.currentCategoryName = this.userProducts[0].category.name;
+    });
+  }
+
+  addToBasket(product: IProductResponse): void {
+    let basket: Array<IProductResponse> = [];
+    if (localStorage.length > 0 && localStorage.getItem('basket')) {
+      basket = JSON.parse(localStorage.getItem('basket') as string);
+      if (basket.some(prod => prod.id === product.id)) {
+        const index = basket.findIndex(prod => prod.id === product.id);
+        basket[index].count += product.count;
+      } else {
+        basket.push(product);
+      }
+    } else {
+      basket.push(product);
+    }
+    localStorage.setItem('basket', JSON.stringify(basket));
+    product.count = 1;
+    this.orderService.changeBasket.next(true);
+  }
+
+  productCount(product: IProductResponse, value: boolean): void {
+    if (value) {
+      ++product.count;
+    } else if (!value && product.count > 1) {
+      --product.count;
+    }
   }
 
   ngOnDestroy(): void {

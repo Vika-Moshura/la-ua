@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IDiscount } from 'src/app/shared/interfaces/discount/discount.interface';
+import { IDiscount, IDiscountResponse } from 'src/app/shared/interfaces/discount/discount.interface';
 import { DiscountService } from 'src/app/shared/services/discount/discount.service';
 
 @Component({
@@ -9,11 +9,11 @@ import { DiscountService } from 'src/app/shared/services/discount/discount.servi
 })
 export class AdminDiscountComponent implements OnInit {
 
-  public adminDiscounts!: IDiscount[];
+  public adminDiscounts!: IDiscountResponse[];
   public description!: string;
   public imagePath = 'https://la.ua/wp-content/uploads/2021/08/6-1.jpg';
   public editStatus = false;
-  public editID!: number;
+  public editID!: number | string;
 
   constructor(
     private discountService: DiscountService
@@ -24,8 +24,8 @@ export class AdminDiscountComponent implements OnInit {
   }
 
   getDiscounts(): void {
-    this.discountService.getAll().subscribe(data => {
-      this.adminDiscounts = data;
+    this.discountService.getAllFirebase().subscribe(data => {
+      this.adminDiscounts = data as IDiscountResponse[];
     })
   }
 
@@ -34,13 +34,17 @@ export class AdminDiscountComponent implements OnInit {
       description: this.description,
       imagePath: this.imagePath
     };
-    this.discountService.create(newDiscount).subscribe(() => {
+    // this.discountService.create(newDiscount).subscribe(() => {
+    //   this.getDiscounts();
+    //   this.resetForm();
+    // });
+    this.discountService.createFirebase(newDiscount).then(() => {
       this.getDiscounts();
       this.resetForm();
     })
   }
 
-  editDiscount(discount: IDiscount): void {
+  editDiscount(discount: IDiscountResponse): void {
     this.description = discount.description;
     this.imagePath = discount.imagePath;
     this.editStatus = true;
@@ -50,17 +54,27 @@ export class AdminDiscountComponent implements OnInit {
   saveDiscount(): void {
     const updateDiscount = {
       description: this.description,
-      imagePath: this.imagePath
+      imagePath: this.imagePath,
+      id: this.editID
     };
-    this.discountService.update(updateDiscount, this.editID).subscribe(() => {
+    // this.discountService.update(updateDiscount, this.editID).subscribe(() => {
+    //   this.getDiscounts();
+    //   this.resetForm();
+    // })
+    this.discountService.updateFirebase(updateDiscount, this.editID as string).then(() => {
       this.getDiscounts();
       this.resetForm();
     })
   }
 
-  deleteDiscount(discount: IDiscount): void {
-    if(confirm('Are you sure?')){
-      this.discountService.delete(discount.id).subscribe(() => {
+  deleteDiscount(discount: IDiscountResponse): void {
+    // if (confirm('Are you sure?')) {
+    //   this.discountService.delete(discount.id).subscribe(() => {
+    //     this.getDiscounts();
+    //   })
+    // }
+    if (confirm('Are you sure?')) {
+      this.discountService.deleteFirebase(discount.id as string).then(() => {
         this.getDiscounts();
       })
     }

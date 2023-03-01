@@ -1,48 +1,109 @@
-<div class="container">
-  <div class="row">
-    <div class="col-12 mt-3">
-      <div class="card mb-3">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img [src]="currentProduct.imagePath" class="img-fluid rounded-start" [alt]="currentProduct.name">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h2 class="card-title">{{currentProduct.name}}</h2>
-              <p class="card-text">{{currentProduct.description}}</p>
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>Білки</th>
-                    <th>Вуглеводи</th>
-                    <th>Жири</th>
-                    <th>Калорії</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>{{currentProduct.proteins}} г</td>
-                    <td>{{currentProduct.carbohydrates}} г</td>
-                    <td>{{currentProduct.fats}} г</td>
-                    <td>{{currentProduct.calories}} ккал</td>
-                  </tr>
-                </tbody>
-              </table>
-              <p class="card-text">Розмір: 30 см</p>
-              <p class="card-text">Вага: {{currentProduct.weight}}</p>
-              <div class="btn-group" role="group" aria-label="Basic outlined example">
-                <button (click)="productCount(currentProduct,false)" type="button"
-                  class="btn btn-outline-danger">-</button>
-                <input class="form-control" type="text" [value]="currentProduct.count" style="width: 40px;">
-                <button (click)="productCount(currentProduct,true)" type="button"
-                  class="btn btn-outline-danger">+</button>
+<div class="header-margin"></div>
+<div class="section">
+  <div class="container">
+    <div class="row hidden-xs">
+      <div class="col-12">
+        <ul class="breadcrumb smallSlideLeft">
+          <li>
+            <a [routerLink]="['']"><span itemprop="title">Головна</span></a>
+          </li>
+          <li><a [routerLink]="[ '/product/'+currentProduct.category.path ]"><span>{{ currentCategoryName }}</span></a>
+          </li>
+          <li><a><span>{{ currentProduct.name }}</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="spacer-lg type2"></div>
+    <div class="row">
+      <div class="col-12 col-xl-10 offset-xl-1">
+        <div class="productDetail row">
+          <div class="col-12 col-lg-6 swiper-entry prod-card-swiper">
+            <div class="cardProduct-images">
+              <div class="swiper-container swiper-container-initialized swiper-container-horizontal">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide swiper-slide-active" style="width: 500px;">
+                    <div class="imgWrapper">
+                      <img [src]="currentProduct.imagePath" alt="">
+                    </div>
+                  </div>
+                  <div class="swiper-slide swiper-slide-next" style="width: 500px;">
+                    <div class="imgWrapper">
+                      <img [src]="currentProduct.imagePath" alt="">
+                    </div>
+                  </div>
+                </div>
               </div>
-              <a class="btn btn-outline-danger" (click)="addToBasket(currentProduct)">Замовити</a>
-              <h4 class="card-title text-danger mt-3">{{currentProduct.price * currentProduct.count}}грн</h4>
+            </div>
+          </div>
+          <div class="cardProduct-content col-12 col-lg-6 align-self-center">
+            <div class="productOderDetail">
+              <h1 class="h3 type2 title">{{ currentProduct.name }}</h1>
+              <p>{{ currentProduct.description }}</p>
+              <div class="wrapper_product_flex">
+                <div class="wrapper_calories">
+                  <div class="product_calaories_wrap">
+                    <div class="product_calaories_item">
+                      <div class="item_calories">Білки</div>
+                      <span> {{ currentProduct.proteins }}</span>
+                    </div>
+                    <div class="product_calaories_item">
+                      <div class="item_calories">Вуглеводи</div>
+                      <span> {{ currentProduct.carbohydrates }}</span>
+                    </div>
+                    <div class="product_calaories_item">
+                      <div class="item_calories">Жири</div>
+                      <span> {{ currentProduct.fats }}</span>
+                    </div>
+                    <div class="product_calaories_item">
+                      <div class="item_calories">Калорійність</div>
+                      <span> {{ currentProduct.calories }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="wrapper_product_size ">
+                  <div class="productSize" *ngIf="currentProduct.category.name === 'pizza'">
+                    <div class="imgWrapper">
+                      <img src="https://la.ua/wp-content/themes/lapiec/assets/frontend/img/icons/size.svg" alt="size">
+                    </div>
+                    <p>Розмір:</p><span>30</span> <i>см</i>
+                  </div>
+                  <div class="productSize">
+                    <div class="imgWrapper">
+                      <img src="https://la.ua/wp-content/themes/lapiec/assets/frontend/img/icons/weight.svg" alt="size">
+                    </div>
+                    <p>Вага:</p><span class="totalWeight">{{ currentProduct.weight }}</span> <i>гр</i>
+                  </div>
+                </div>
+              </div>
+              <div class="castomIngredients ">
+                <div class="cardProductOrder productOrder">
+                  <div class="orderDetailSection">
+                    <p class="counterTitle">Кількість:</p>
+                    <div class="productCountWrapper">
+                      <span class="productCount lessProduct" (click)="productCount(currentProduct, false)"></span>
+                      <input class="product-qty-single" type="text" maxlength="3" [value]="currentProduct.count">
+                      <span class="productCount moreProduct" (click)="productCount(currentProduct, true)"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="cardProductOrder productOrder block-2">
+                <div class="orderDetailSection">
+                  <p class="counterTitle">Всього:</p>
+                  <div class="productPrice">
+                    <span class="productDetailPrice">{{ currentProduct.price * currentProduct.count }}</span> <i>грн</i>
+                  </div>
+                </div>
+              </div>
+              <div class="newIngredientWrapper"></div>
+              <div class="prod-card-btn">
+                <a class="button update-cart-product-single" (click)="addToBasket(currentProduct)">Додати у кошик</a>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <div class="spacer-xl"></div>
 </div>
