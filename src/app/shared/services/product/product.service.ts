@@ -54,7 +54,7 @@ export class ProductService {
     const q = query(collection(this.afs, "products"), where("category.path", "==", name));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      arr.push(doc.data());
+      arr.push({ ...doc.data(), id: doc.id });
     });
     return arr;
   }

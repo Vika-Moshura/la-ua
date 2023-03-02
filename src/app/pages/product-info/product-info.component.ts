@@ -22,19 +22,9 @@ export class ProductInfoComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(response => {
       this.currentProduct = response['productInfo'];
-      console.log(this.currentProduct);
       this.currentCategoryName = this.currentProduct.category.name;
-      console.log(this.currentCategoryName);
     })
   }
-
-  // loadProduct(): void {
-  //   const id = this.activatedRoute.snapshot.paramMap.get('id');
-  //   this.productService.getOneFirebase(id as string).subscribe(data => {
-  //     this.currentProduct = data as IProductResponse;
-  //     console.log(this.currentProduct);
-  //   })
-  // }
 
   productCount(product: IProductResponse, value: boolean): void {
     if (value) {

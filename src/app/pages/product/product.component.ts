@@ -36,6 +36,7 @@ export class ProductComponent implements OnInit, OnDestroy {
       this.userProducts = data as IProductResponse[];
       this.currentCategoryName = this.userProducts[0].category.name;
     });
+    
   }
 
   addToBasket(product: IProductResponse): void {

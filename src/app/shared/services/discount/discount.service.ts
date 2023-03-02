@@ -52,7 +52,6 @@ export class DiscountService {
     return docData(discountDocReference, { idField: 'id' })
   }
 
-
   createFirebase(discount: IDiscountRequest): Promise<DocumentReference<DocumentData>> {
     return addDoc(this.discountCollection, discount);
   }
